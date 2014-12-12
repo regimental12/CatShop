@@ -3,21 +3,21 @@ package orders;
 import catalogue.Basket;
 import catalogue.Product;
 import middle.*;
-import org.junit.After;
+/*import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.Test;*/
 
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.fail;
+//import static org.junit.Assert.fail;
 
 /**
  * A JUnit test of the Order class
  */
 public class OrderTest 
 {
-  private final int ORDER_NUMBER1 = 7;     // number
+ /* private final int ORDER_NUMBER1 = 7;     // number
   private final int ORDER_NUMBER2 = 8;     // number
   private final int ORDER_NUMBER3 = 10;    // number
   private Basket theBought1 = null;        // items
@@ -103,7 +103,7 @@ public class OrderTest
       fail( "Exception " + e.getMessage() );
     }
   
-  }
+  }*/
   
 }
 
