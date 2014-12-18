@@ -26,7 +26,7 @@ public class Order implements OrderProcessing
 {
   private enum State {Waiting, BeingPicked, ToBeCollected };
   /**
-   * Wraps a Basket and it state into a folder
+   * Wraps a Basket and its state into a folder
    */
   private class Folder
   {
@@ -88,7 +88,9 @@ public class Order implements OrderProcessing
          throws OrderException
   {
     // You need to modify and fill in the correct code
-    DEBUG.trace( "DEBUG: New order" );
+    folders.add(new Folder(bought));
+
+    DEBUG.trace("DEBUG: New order");
   }
 
   /**
@@ -101,7 +103,13 @@ public class Order implements OrderProcessing
     // You need to modify and fill in the correct code
     DEBUG.trace( "DEBUG: Get order to pick" );
     Basket foundWaiting = null;
-    return foundWaiting;
+    if (!folders.isEmpty())
+    {
+        foundWaiting = folders.listIterator().next().getBasket();
+        folders.listIterator().next().newState(State.BeingPicked);
+        return foundWaiting;
+    }
+    return null;
   }
 
   /**
@@ -116,6 +124,17 @@ public class Order implements OrderProcessing
   {
     // You need to modify and fill in the correct code
     DEBUG.trace( "DEBUG: Order picked [%d]", orderNum );
+      if (!folders.isEmpty())
+      {
+          for (Folder fl : folders )
+          {
+            if (fl.getBasket().getOrderNum() == orderNum)
+            {
+                fl.newState(State.ToBeCollected);
+            }
+          }
+
+      }
     return false;
   }
 
@@ -127,9 +146,21 @@ public class Order implements OrderProcessing
   public synchronized boolean informOrderColected( int orderNum )
          throws OrderException
   {
-    // You need to modify and fill in the correct code
-    DEBUG.trace( "DEBUG: Order collected [%d]", orderNum );
-    return false;
+      // You need to modify and fill in the correct code
+      DEBUG.trace( "DEBUG: Order collected [%d]", orderNum );
+      if (!folders.isEmpty())
+      {
+          for (int i = 0; i < folders.size() ; i++)
+          {
+              if(folders.get(i).getBasket().getOrderNum() == orderNum)
+              {
+                  folders.remove(i);
+                  return true;
+          }
+
+          }
+      }
+      return false;
   }
 
   /**
