@@ -33,20 +33,6 @@ public class OrderTest
     public Boolean checkOrderState(int orderNo , String key) throws OrderException {
         //take in key to search
         //loop through to find key
-        /*
-        Map<String, List<String>> m = new HashMap<String, List<String>>();
-
-        m.put("list1", Arrays.asList("s1", "s2", "s3"));
-
-        for (Map.Entry<String, List<String>> me : m.entrySet()) {
-          String key = me.getKey();
-          List<String> valueList = me.getValue();
-          System.out.println("Key: " + key);
-          System.out.print("Values: ");
-          for (String s : valueList) {
-            System.out.print(s + " ");
-          }
-        }*/
         // once found the key loop through those values
         try
         {
@@ -127,31 +113,47 @@ public class OrderTest
             // Check if is ORDER_NUMBER1
             // Check if ORDER_NUMBER1 is "BeingPicked"
             // Check if ORDER_NUMBER2 is still "Waiting"
+            System.out.println(theOrder.getOrderState().toString());
+            Assert.assertTrue(checkOrderState(ORDER_NUMBER1,"BeingPicked"));
+            Assert.assertTrue(checkOrderState(ORDER_NUMBER2,"Waiting"));
 
             //Check [order number 1] completion of being "picked"
             ok = theOrder.informOrderPicked( ORDER_NUMBER1 );
+            System.out.println(theOrder.getOrderState().toString());
+            Assert.assertTrue(checkOrderState(ORDER_NUMBER1,"ToBeCollected"));
 
 
             //Check if [order number 3]can be completed
             // This should fail as no [order no 3]
             ok = theOrder.informOrderPicked( ORDER_NUMBER3 );
+            System.out.println(theOrder.getOrderState().toString());
+            Assert.assertFalse(checkOrderState(ORDER_NUMBER3,"ToBeCollected"));
 
             //Check if [order number 1] removed from system
             ok = theOrder.informOrderColected( ORDER_NUMBER1 );
+            System.out.println(theOrder.getOrderState().toString());
 
             //Check if [order number 3] removed from system
             // Order number 3 does not exist
             ok = theOrder.informOrderColected( ORDER_NUMBER3 );
+            System.out.println(theOrder.getOrderState().toString());
+            Assert.assertFalse(checkOrderState(ORDER_NUMBER3,"ToBeCollected"));
 
             // Progress [order number 2]
             //Get order to pick
             o2p = theOrder.getOrderToPick();
             // Check if is ORDER_NUMBER2
+            System.out.println(theOrder.getOrderState().toString());
+            Assert.assertTrue(checkOrderState(ORDER_NUMBER2,"BeingPicked"));
 
             //Check [order number 2] completion of being "picked"
             ok = theOrder.informOrderPicked( ORDER_NUMBER2 );
+            System.out.println(theOrder.getOrderState().toString());
+            Assert.assertTrue(checkOrderState(ORDER_NUMBER2,"ToBeCollected"));
 
             ok = theOrder.informOrderColected( ORDER_NUMBER2 );
+            System.out.println(theOrder.getOrderState().toString());
+            Assert.assertFalse(checkOrderState(ORDER_NUMBER2,"ToBeCollected"));
 
         } catch ( Exception e )
         {
