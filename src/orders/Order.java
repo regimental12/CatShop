@@ -105,13 +105,28 @@ public class Order implements OrderProcessing
     Basket foundWaiting = null;
     if (!folders.isEmpty())
     {
-        if(folders.listIterator().next().getState() == State.ToBeCollected)
+        /*if(folders.listIterator().next().getState() == State.BeingPicked)
         {
             return null;
         }
-        foundWaiting = folders.listIterator().next().getBasket();
-        folders.listIterator().next().newState(State.BeingPicked);
-        return foundWaiting;
+        if(folders.listIterator().next().getState() == State.ToBeCollected)
+        {
+            return null;
+        }*/
+        for (Folder fl : folders )
+        {
+            if(fl.getState() == State.Waiting)
+            {
+                foundWaiting = fl.getBasket();
+                fl.newState(State.BeingPicked);
+                return foundWaiting;
+            }
+            /*if (folders.listIterator().next().getState() == State.Waiting) {
+                foundWaiting = folders.listIterator().next().getBasket();
+                folders.listIterator().next().newState(State.BeingPicked);
+                return foundWaiting;
+            }*/
+        }
     }
     return null;
   }

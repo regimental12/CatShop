@@ -26,10 +26,12 @@ public class PickView implements Observer
   private final JTextArea   theOutput  = new JTextArea();
   private final JScrollPane theSP      = new JScrollPane();
   private final JButton     theBtPicked= new JButton( PICKED );
+  private final JButton   getOrderToPick = new JButton("Get Next Order");
  
   private OrderProcessing theOrder     = null;
   
   private PickController cont= null;
+
 
   /**
    * Construct the view
