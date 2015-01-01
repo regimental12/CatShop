@@ -25,7 +25,10 @@ public class DisplayView extends Canvas implements Observer
   private int H = 300;         // Height of window 
   private int W = 400;         // Width  of window 
   private String textToDisplay = "";
+  private String ordersToDisplay = "";
   private DisplayController cont= null;
+  private DisplayModel aModelOfDisplay;
+  int x = 200;
   
   /**
    * Construct the view
@@ -72,11 +75,14 @@ public class DisplayView extends Canvas implements Observer
 
       textToDisplay = 
            "Orders in system" + "\n" +
-           "Waiting        : " + listOfOrders( res, "Waiting" ) + 
+           "Waiting        : "/* + listOfOrders( res, "Waiting" ) */+
            "\n"  + 
-           "Being picked   : " + listOfOrders( res, "BeingPicked" ) + 
+           "Being picked   : " /*+ listOfOrders( res, "BeingPicked" )*/ +
            "\n"  + 
-           "To Be Collected: " + listOfOrders( res, "ToBeCollected" );
+           "To Be Collected: " /*+ listOfOrders( res, "ToBeCollected" )*/;
+       ordersToDisplay = listOfOrders(res , "Waiting") + "\n" +
+                         listOfOrders(res , "BeingPicked") + "\n" +
+                         listOfOrders(res , "ToBeCollected");
     }
     catch ( OrderException err )
     {
@@ -128,20 +134,59 @@ public class DisplayView extends Canvas implements Observer
  
   public void drawActualScreen( Graphics2D g )  // Re draw contents 
   {
+
     g.setPaint( Color.white );            // Paint Colour 
     W = getWidth(); H = getHeight();      // Current size
-    
+
     g.setFont( font );
     g.fill( new Rectangle2D.Double( 0, 0, W, H ) );
 
     // Draw state of system on display
     String lines[] = textToDisplay.split("\n");
+    String orders[] = ordersToDisplay.split("\n");
+    //System.out.print(ordersToDisplay);
     g.setPaint( Color.black );
-    for ( int i=0; i<lines.length; i++ )
+    x -=20;
+    for (int i = 0; i < lines.length; i++)
     {
-      g.drawString( lines[i], 0, 50 + 50*i );
+        if (i == 1)
+        {
+            g.setPaint(Color.red);
+        }
+        if (i == 2)
+        {
+            g.setPaint(Color.orange);
+        }
+        if (i == 3)
+        {
+            g.setPaint(Color.green);
+        }
+        g.drawString(lines[i], 0, 50 + 50 * i);
+        if(i < orders.length)
+        {
+            if(orders[i] != null)
+            {
+                if (i == 0)
+                {
+                    g.setPaint(Color.red);
+                }
+                if (i == 1)
+                {
+                    g.setPaint(Color.orange);
+                }
+                if (i == 2)
+                {
+                    g.setPaint(Color.green);
+                }
+                g.drawString(orders[i], x, 125 + 50 * i);
+            }
+        }
+
     }
-    
+    if (x < 0)
+    {
+        x = 200;
+    }
   }
 
   /**
