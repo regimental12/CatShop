@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CatShop:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/CatShop_jar</output-path>
+    <root id="archive" name="CatShop.jar">
+      <element id="module-output" name="CatShop" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jdk1.8.0/db/lib/derbytools.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files/Java/jdk1.8.0/db/lib/derby.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$APPLICATION_HOME_DIR$/lib/junit-4.11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$APPLICATION_HOME_DIR$/lib/hamcrest-core-1.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$APPLICATION_HOME_DIR$/lib/hamcrest-library-1.3.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

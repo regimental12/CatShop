@@ -197,5 +197,36 @@ public class CashierModel extends Observable
   {
     return new Basket();
   }
+
+  public void removeItem(String pr)
+  {
+      for (int i = 0; i < theBasket.size(); i++)
+      {
+          if (theBasket.get(i).getProductNum().equals(pr))
+          {
+              theBasket.get(i).setQuantity(theBasket.get(i).getQuantity() - 1);
+              try
+              {
+                  theStock.addStock(pr , 1);
+              } catch (StockException e)
+              {
+                  e.printStackTrace();
+              }
+          }
+          checkForZero();
+          askForUpdate();
+      }
+  }
+
+  private void checkForZero()
+  {
+      for (int i = 0; i < theBasket.size(); i++)
+      {
+          if (theBasket.get(i).getQuantity() <= 0)
+          {
+              theBasket.remove(i);
+          }
+      }
+  }
 }
   

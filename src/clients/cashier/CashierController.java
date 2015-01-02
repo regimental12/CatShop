@@ -46,4 +46,8 @@ public class CashierController
   {
     model.doBought();
   }
+
+  public void removeItem(String pr) { model.removeItem(pr);}
 }
+
+
