@@ -102,60 +102,47 @@ public class Order implements OrderProcessing
   {
     // You need to modify and fill in the correct code
     DEBUG.trace( "DEBUG: Get order to pick" );
-    Basket foundWaiting = null;
+    Basket b = null;
     if (!folders.isEmpty())
     {
-        /*if(folders.listIterator().next().getState() == State.BeingPicked)
-        {
-            return null;
-        }
-        if(folders.listIterator().next().getState() == State.ToBeCollected)
-        {
-            return null;
-        }*/
         for (Folder fl : folders )
         {
             if(fl.getState() == State.Waiting)
             {
-                foundWaiting = fl.getBasket();
+                b = fl.getBasket();
                 fl.newState(State.BeingPicked);
-                return foundWaiting;
+                return b;
             }
-            /*if (folders.listIterator().next().getState() == State.Waiting) {
-                foundWaiting = folders.listIterator().next().getBasket();
-                folders.listIterator().next().newState(State.BeingPicked);
-                return foundWaiting;
-            }*/
         }
     }
     return null;
   }
-
-  /**
-   * Informs the order processing system that the order has been
-   * picked and the products are now being delivered to the
-   * collection desk
-   * @param  orderNum The order that has been picked
-   * @return true Order in system, false no such order
-   */
-  public synchronized boolean informOrderPicked( int orderNum )
-         throws OrderException
-  {
-    // You need to modify and fill in the correct code
-    DEBUG.trace( "DEBUG: Order picked [%d]", orderNum );
-      if (!folders.isEmpty())
-      {
-          for (Folder fl : folders )
-          {
-            if (fl.getBasket().getOrderNum() == orderNum)
+    /**
+     * Informs the order processing system that the order has been
+     * picked and the products are now being delivered to the
+     * collection desk
+     * @param  orderNum The order that has been picked
+     * @return true Order in system, false no such order
+     */
+    public synchronized boolean informOrderPicked( int orderNum )
+            throws OrderException
+    {
+        // You need to modify and fill in the correct code
+        DEBUG.trace( "DEBUG: Order picked [%d]", orderNum );
+        if (!folders.isEmpty())
+        {
+            for (Folder fl : folders )
             {
-                fl.newState(State.ToBeCollected);
+                if (fl.getBasket().getOrderNum() == orderNum)
+                {
+                    fl.newState(State.ToBeCollected);
+                }
             }
-          }
 
-      }
-    return false;
-  }
+        }
+        return false;
+    }
+
 
   /**
    * Informs the order processing system that the order has been

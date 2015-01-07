@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Fri Jan 02 12:19:20 GMT 2015:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.2 - (1495037): instance a816c00e-014a-aa95-f08f-000006f475b8 
+Wed Jan 07 09:00:19 GMT 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.1.2 - (1495037): instance a816c00e-014a-c39f-84b0-000006f47f30 
 on database directory C:\Users\Richard\workspace\CatShop\out\artifacts\CatShop_jar\catshop.db with class loader sun.misc.Launcher$AppClassLoader@55f96302 
 Loaded from file:/C:/Users/Richard/workspace/CatShop/out/artifacts/CatShop_jar/CatShop.jar
 java.vendor=Oracle Corporation
